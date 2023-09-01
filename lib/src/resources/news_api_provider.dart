@@ -5,15 +5,15 @@ import 'dart:convert';
 
 class NewsApiProvider {
   Client client = Client();
-  fetchTopIds() async {
+  Future<List<int>> fetchTopIds() async {
     final response = await client
         .get("https://hacker-news.firebaseio.com/v0/topstories.json" as Uri);
     final ids = json.decode(response.body);
 
-    return ids;
+    return ids.cast<int>();
   }
 
-  fetchItem(int id) async {
+  Future<ItemModel> fetchItem(int id) async {
     final response = await client
         .get('https://hacker-news.firebaseio.com/v0/item/$id.json' as Uri);
     final parsedJson = json.decode(response.body);
