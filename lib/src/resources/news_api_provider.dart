@@ -2,8 +2,9 @@
 import '../models/items_model.dart';
 import 'package:http/http.dart' show Client;
 import 'dart:convert';
+import 'repository.dart';
 
-class NewsApiProvider {
+class NewsApiProvider implements Source{
   Client client = Client();
   Future<List<int>> fetchTopIds() async {
     final response = await client
