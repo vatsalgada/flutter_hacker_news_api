@@ -4,7 +4,7 @@ import 'package:http/http.dart' show Client;
 import 'dart:convert';
 import 'repository.dart';
 
-class NewsApiProvider implements Source{
+class NewsApiProvider implements Source {
   Client client = Client();
   Future<List<int>> fetchTopIds() async {
     final response = await client
@@ -22,5 +22,3 @@ class NewsApiProvider implements Source{
     return ItemModel.fromJson(parsedJson);
   }
 }
-
-//checking for comments//
