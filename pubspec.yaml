@@ -13,6 +13,7 @@ dependencies:
   sqflite:
   path_provider: 
   http:
+  rxdart:
   
 dev_dependencies:
   flutter_test:
