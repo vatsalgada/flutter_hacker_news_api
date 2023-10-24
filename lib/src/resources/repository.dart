@@ -20,12 +20,10 @@ class Repository {
   }
 
   Future<ItemModel> fetchItem(int id) async {
-    print('searching..');
     var item;
     var source;
 
     for (source in sources) {
-      print(source);
       item = await source.fetchItem(id);
       if (item != null) {
         break;

@@ -22,13 +22,15 @@ Widget buildList(StoriesBloc bloc) {
       stream: bloc.topIds,
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
-          print(snapshot.data);
+          //print(snapshot.data);
           return Center(child: CircularProgressIndicator());
         } else {
           return ListView.builder(
             itemCount: snapshot.data?.length,
             itemBuilder: (context, int index) {
               final temp = snapshot.data?[index];
+              bloc.fetchItem(temp!);
+
               return NewsListTile(itemId: snapshot.data![index]);
             },
           );

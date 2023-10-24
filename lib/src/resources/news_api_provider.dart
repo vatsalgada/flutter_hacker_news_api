@@ -17,12 +17,14 @@ class NewsApiProvider implements Source {
     return ids.cast<int>();
   }
 
+  @override
   Future<ItemModel> fetchItem(int id) async {
-    print('cursor at tile details');
-    final response = await client
-        .get('https://hacker-news.firebaseio.com/v0/item/$id.json' as Uri);
-    final parsedJson = json.decode(response.body);
+    //print('cursor at tile details');
+    final response = await client.get(
+        Uri.parse(('https://hacker-news.firebaseio.com/v0/item/$id.json')));
 
+    final parsedJson = json.decode(response.body);
+    //print(parsedJson);
     return ItemModel.fromJson(parsedJson);
   }
 }

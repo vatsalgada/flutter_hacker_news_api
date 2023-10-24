@@ -18,7 +18,6 @@ class NewsDbProvider implements Source, Cache {
   }
 
   void init() async {
-    print('init db');
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
     final path = join(documentsDirectory.path, 'items.db');
     db = await openDatabase(
@@ -48,18 +47,17 @@ class NewsDbProvider implements Source, Cache {
   }
 
   Future<ItemModel?> fetchItem(int id) async {
-    print('cursor checked db 0');
     final maps = await db.query(
       "Items",
       columns: null,
       where: "id = ?",
       whereArgs: [id],
     );
-    print('cursor checked db 1');
+
     if (maps.isNotEmpty) {
       return ItemModel.fromDb(maps.first);
     }
-    print('cursor checked db 2');
+
     return null;
   }
 

@@ -4,8 +4,8 @@ import 'package:flutter_hacker_news_api/src/blocs/stories_provider.dart';
 import 'package:flutter_hacker_news_api/src/models/items_model.dart';
 
 class NewsListTile extends StatelessWidget {
-  const NewsListTile({super.key, required this.itemId});
   final int itemId;
+  const NewsListTile({required this.itemId});
 
   @override
   Widget build(BuildContext context) {
@@ -15,21 +15,24 @@ class NewsListTile extends StatelessWidget {
         builder:
             (context, AsyncSnapshot<Map<int, Future<ItemModel>>> snapshot) {
           if (!snapshot.hasData) {
-            return const Text('Stream loading');
-          } else {
-            return FutureBuilder(
-              future: snapshot.data?[itemId],
-              builder: (context, itemSnapshot) {
-                print('0--------------0-------------0------------0');
-                var tempdata = itemSnapshot.data;
-                if (!itemSnapshot.hasData) {
-                  return Text("Still loading item: $itemId");
-                  //return Text('jj');
-                } else
-                  return Text(tempdata!.title);
-              },
-            );
+            print('$snapshot.data');
+            return CircularProgressIndicator();
           }
+
+          return FutureBuilder(
+            future: snapshot.data![itemId],
+            builder: (context, AsyncSnapshot<ItemModel> itemSnapshot) {
+              var tempdata = itemSnapshot.data;
+              print('tempdata is $tempdata');
+              var temp2 = snapshot.data?[itemId].toString();
+              print('temp 2 is $temp2');
+              print('ItemID is $itemId');
+              if (!itemSnapshot.hasData) {
+                return Text("Still loading item: $itemId");
+              } else
+                return Text(tempdata!.title);
+            },
+          );
         });
   }
 }
