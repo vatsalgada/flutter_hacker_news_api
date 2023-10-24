@@ -15,20 +15,20 @@ class ItemModel {
   final String title;
   final int descendants;
 
-  ItemModel.fromJson(Map<String, dynamic> paresedJson)
-      : id = paresedJson['id'],
-        deleted = paresedJson['deleted'],
-        type = paresedJson['type'],
-        by = paresedJson['by'],
-        time = paresedJson['time'],
-        text = paresedJson['text'],
-        dead = paresedJson['dead'],
-        parent = paresedJson['parent'],
-        kids = paresedJson['kids'],
-        url = paresedJson['url'],
-        title = paresedJson['title'],
-        score = paresedJson['score'],
-        descendants = paresedJson['descendants'];
+  ItemModel.fromJson(Map<String, dynamic> parsedJson)
+      : id = parsedJson['id'],
+        deleted = parsedJson['deleted'] ?? false,
+        type = parsedJson['type'],
+        by = parsedJson['by'] ?? '',
+        time = parsedJson['time'],
+        text = parsedJson['text'] ?? '',
+        dead = parsedJson['dead'] ?? false,
+        parent = parsedJson['parent'],
+        kids = parsedJson['kids'] ?? [],
+        url = parsedJson['url'],
+        score = parsedJson['score'],
+        title = parsedJson['title'],
+        descendants = parsedJson['descendants'] ?? 0;
 
   ItemModel.fromDb(Map<String, dynamic> parsedJson)
       : id = parsedJson['id'],
